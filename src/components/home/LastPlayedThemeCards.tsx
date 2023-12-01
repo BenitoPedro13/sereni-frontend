@@ -2,6 +2,7 @@ import React from "react";
 
 import BeachThemeCardBg from "@/../public/images/themes/beach/card-cover.png";
 import DefaultMemoji from "@/../public/images/users/default-memoji.png";
+import Link from "next/link";
 
 const LastPlayedThemeCards = () => {
   return (
@@ -41,26 +42,28 @@ const LastPlayedThemeCards = () => {
               10 📷
             </p>
           </div>
-          <button className="flex items-center justify-center w-fit h-fit py-2 px-4 rounded-md gap-2 bg-[#14532D]">
-            <div className="w-4 h-4">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                viewBox="0 0 16 16"
-                fill="none"
-              >
-                <path
-                  d="M3.3335 2L12.6668 8L3.3335 14V2Z"
-                  stroke="white"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </div>
-            <p className="text-white text-sm font-medium leading-6">jogar</p>
-          </button>
+          <Link href="/themes/praia">
+            <button className="flex items-center justify-center w-fit h-fit py-2 px-4 rounded-md gap-2 bg-[#14532D]">
+              <div className="w-4 h-4">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 16 16"
+                  fill="none"
+                >
+                  <path
+                    d="M3.3335 2L12.6668 8L3.3335 14V2Z"
+                    stroke="white"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </div>
+              <p className="text-white text-sm font-medium leading-6">jogar</p>
+            </button>
+          </Link>
         </div>
       </div>
     </div>

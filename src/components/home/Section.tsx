@@ -14,7 +14,7 @@ const HomeSection: React.FC<IHomeSectionProps> = ({
   children,
 }) => {
   return (
-    <section className="flex flex-col items-start gap-6 self-stretch">
+    <section className="flex flex-col items-center gap-6 self-stretch">
       <div className="flex flex-col items-start self-stretch">
         <div className="flex items-center gap-1 self-stretch">
           {titleIcon ?? null}
