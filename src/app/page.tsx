@@ -12,7 +12,7 @@ export default function Home() {
         backgroundSize: "cover",
       }}
     >
-      <div className="flex flex-col items-center justify-between w-full h-full min-h-[95vh] pt-24 pb-4">
+      <div className="flex flex-col items-center justify-between w-full h-full min-h-[85vh] pt-24 pb-4">
         <div className="">
           <h1 className="flex justify-center items-center h-[65px] text-[#FFF7ED] text-[62.931px] font-medium leading-[57.267px] tracking-[-3.578px]">
             sereni

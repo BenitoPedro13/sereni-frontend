@@ -12,7 +12,7 @@ export default function Home() {
         backgroundSize: "cover",
       }}
     >
-      <div className="flex flex-col items-center justify-between w-full h-full min-h-[95vh] pt-24 pb-4">
+      <div className="flex flex-col items-center justify-between w-full h-full min-h-[85vh] pt-24 pb-4">
         <div className="">
           <h2 className="flex justify-center items-center text-[#775332] text-[17.25px] font-semibold leading-[23px] tracking-[-0.104px]">
             tema

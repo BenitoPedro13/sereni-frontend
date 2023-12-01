@@ -92,7 +92,7 @@ export default function Home() {
 
   return (
     <main className="flex h-full items-center justify-center px-4">
-      <div className="flex flex-col items-center justify-between w-full h-full min-h-[95vh] px-4 pt-6">
+      <div className="flex flex-col items-center justify-between w-full h-full min-h-[85vh] px-4 pt-6">
         <div className="w-full space-y-24">
           <h3 className="w-full text-[#775332] text-center text-[30px] font-medium leading-[36px] tracking-[-0.225px]">
             antes de começar, respire{" "}
