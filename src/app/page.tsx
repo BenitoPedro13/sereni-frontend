@@ -4,7 +4,7 @@ import Link from "next/link";
 export default function Home() {
   return (
     <main
-      className="flex min-h-screen items-center justify-center px-4"
+      className="flex h-full items-center justify-center px-4"
       style={{
         backgroundImage: `url(${OnboardingBG.src})`,
         backgroundPosition: "center",
@@ -12,7 +12,7 @@ export default function Home() {
         backgroundSize: "cover",
       }}
     >
-      <div className="flex flex-col items-center justify-between w-full min-h-screen pt-24 pb-10">
+      <div className="flex flex-col items-center justify-between w-full h-full min-h-[85vh] pt-24 pb-10">
         <div className="">
           <h1 className="flex justify-center items-center h-[65px] text-[#FFF7ED] text-[62.931px] font-medium leading-[57.267px] tracking-[-3.578px]">
             sereni

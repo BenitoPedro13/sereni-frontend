@@ -21,8 +21,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${ibmPlexSerif.className} bg-[#FFF7ED]`}>
-        <div className="flex justify-center items-center">
-          <div className="w-full">{children}</div>
+        <div className="flex justify-center min-h-[100vh] h-full items-center py-5">
+          <div className="w-full max-w-[390px] min-h-[85vh] h-full rounded-3xl overflow-hidden">
+            {children}
+          </div>
         </div>
       </body>
     </html>
