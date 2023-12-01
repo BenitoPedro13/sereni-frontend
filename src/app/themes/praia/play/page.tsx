@@ -10,7 +10,7 @@ const variants = {
 
 export default function Home() {
   const [animationStarted, setAnimationStarted] = useState(false);
-  const [animationCount, setAnimationCount] = useState(5);
+  const [animationCount, setAnimationCount] = useState(0);
   const [scope, animate] = useAnimate();
 
   useEffect(() => {
