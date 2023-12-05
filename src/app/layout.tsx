@@ -22,7 +22,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${ibmPlexSerif.className} bg-[#FFF7ED]`}>
         <div className="flex justify-center min-h-[100vh] h-full items-start py-5">
-          <div className="w-full max-w-[430px] min-h-[85vh] h-full rounded-3xl overflow-hidden">
+          <div className="w-full max-w-[430px] min-h-[calc(100vh-48px)] h-full rounded-3xl overflow-hidden">
             {children}
           </div>
         </div>

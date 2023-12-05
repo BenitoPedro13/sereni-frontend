@@ -2,20 +2,22 @@
 import Link from "next/link";
 import { useAnimate } from "framer-motion";
 import { useEffect, useState } from "react";
-
-const variants = {
-  initial: { width: 254, heigh: 254 },
-  final: { width: 368, heigh: 368 },
-};
+import { useRouter } from "next/navigation";
 
 export default function Home() {
   const [animationStarted, setAnimationStarted] = useState(false);
   const [animationCount, setAnimationCount] = useState(0);
   const [scope, animate] = useAnimate();
 
+  const router = useRouter();
+
   useEffect(() => {
     let intervalId: NodeJS.Timeout;
     let timoutId: NodeJS.Timeout;
+
+    if (animationCount > 9) {
+      return router.push("/themes/praia/start");
+    }
 
     if (animationCount === 0) {
       timoutId = setInterval(() => {
@@ -35,8 +37,6 @@ export default function Home() {
         setAnimationCount(animationCount + 1);
         startAnimation();
       }, 1000);
-    } else if (animationCount > 10) {
-      return;
     } else {
       intervalId = setInterval(() => {
         console.log("interval", animationCount);
@@ -88,11 +88,15 @@ export default function Home() {
       clearInterval(intervalId);
       clearTimeout(timoutId);
     };
-  }, [animate, animationStarted, scope, animationCount]);
+  }, [animate, animationStarted, scope, animationCount, router]);
 
   return (
-    <main className="flex h-full items-center justify-center px-4">
-      <div className="flex flex-col items-center justify-between w-full h-full min-h-[85vh] px-4 pt-6">
+    <main
+      className={`flex w-full h-full items-center justify-center rounded-3xl overflow-hidden`}
+    >
+      <div
+        className={`duration-500 flex flex-col items-center justify-between w-full h-full min-h-[calc(100vh-48px)] px-4 pt-24 pb-4`}
+      >
         <div className="w-full space-y-24">
           <h3 className="w-full text-[#775332] text-center text-[30px] font-medium leading-[36px] tracking-[-0.225px]">
             antes de começar, respire{" "}
@@ -111,7 +115,6 @@ export default function Home() {
             </p>
           </div>
         </div>
-
         <div
           className={`flex items-center justify-center transition-all duration-500 ${
             animationCount > 9
@@ -144,7 +147,7 @@ export default function Home() {
           </div>
         </div>
         <div className="">
-          <Link href="/themes/praia">
+          <Link href={`/themes/praia/`}>
             <button className="inline-flex items-center justify-center w-fit h-fit py-4 px-8 rounded-xl gap-5 bg-[#94A3B8]">
               <p className="text-white text-2xl font-medium leading-[48px]">
                 jogar
