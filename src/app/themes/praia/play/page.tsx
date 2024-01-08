@@ -15,8 +15,12 @@ export default function Home() {
   const [isViewportSmall, setIsViewportSmall] = useState(false);
 
   const router = useRouter();
-
-  const viewportHeight = !window ? 0 : window.innerHeight;
+  let viewportHeight: number = 0;
+  if (!window) {
+    viewportHeight = 0;
+  } else {
+    window.innerHeight;
+  }
 
   // Calculate the proportional values based on the viewport height
   const proportionalWidth = (viewportHeight * 150) / 830; // Adjust as needed
@@ -26,6 +30,10 @@ export default function Home() {
   useEffect(() => {
     let intervalId: NodeJS.Timeout;
     let timoutId: NodeJS.Timeout;
+
+    if (!window) {
+      return;
+    }
 
     const handleViewportChange = () => {
       setIsViewportSmall(window.innerHeight < 830);
