@@ -180,7 +180,7 @@ export default function Home() {
         </div>
         <div className="">
           <Link href={`/themes/praia/quiz`}>
-            <button className="inline-flex items-center justify-center w-fit h-fit py-4 px-8 rounded-xl gap-5 bg-[#775332]">
+            <button className="inline-flex items-center justify-center w-fit h-fit py-4 px-8 rounded-xl gap-5 bg-[#166534]">
               <p className="text-white text-2xl font-medium leading-[48px]">
                 continuar
               </p>

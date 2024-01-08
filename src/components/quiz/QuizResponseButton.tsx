@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Dispatch, FC, SetStateAction } from "react";
 
 import { Poppins } from "next/font/google";
 
@@ -7,15 +7,15 @@ const poppins = Poppins({
   subsets: ["latin"],
 });
 
-interface IQuizResponseButton {
+export interface IQuizResponseButton {
   label: string;
-  handleClick: (answer: boolean) => void;
+  handleClick?: (answer: boolean, label: string) => void;
   answer?: boolean;
 }
 
 const QuizResponseButton: React.FC<IQuizResponseButton> = ({
   label,
-  handleClick,
+  handleClick = null,
   answer = false,
 }) => {
   return (
@@ -23,7 +23,10 @@ const QuizResponseButton: React.FC<IQuizResponseButton> = ({
       onClick={(e) => {
         e.preventDefault();
         e.stopPropagation();
-        handleClick(answer);
+        if (!handleClick) {
+          return;
+        }
+        handleClick(answer, label);
       }}
       className="relative inline-flex items-center w-fit h-[67px]"
     >
