@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { motion, useAnimate } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 
 import sereniBG from "@/../public/svgs/backgrounds/sereni-flowers.svg";
@@ -15,21 +15,22 @@ export default function Home() {
   const [isViewportSmall, setIsViewportSmall] = useState(false);
 
   const router = useRouter();
-  let viewportHeight: number = 0;
-  if (!window) {
-    viewportHeight = 0;
-  } else {
-    window.innerHeight;
-  }
+  let viewportHeight = useRef(0);
 
   // Calculate the proportional values based on the viewport height
-  const proportionalWidth = (viewportHeight * 150) / 830; // Adjust as needed
-  const proportionalHeight = (viewportHeight * 150) / 830; // Adjust as needed
-  const proportionalAnimateValue = (viewportHeight * 254) / 830; // Adjust as needed
+  let proportionalWidth: number = (viewportHeight.current * 150) / 830; // Adjust as needed
+  let proportionalHeight: number = (viewportHeight.current * 150) / 830; // Adjust as needed
+  let proportionalAnimateValue: number = (viewportHeight.current * 254) / 830; // Adjust as needed
 
   useEffect(() => {
     let intervalId: NodeJS.Timeout;
     let timoutId: NodeJS.Timeout;
+
+    if (!window) {
+      viewportHeight.current = 0;
+    } else {
+      viewportHeight.current = window.innerHeight;
+    }
 
     if (!window) {
       return;
