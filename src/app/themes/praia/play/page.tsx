@@ -1,18 +1,22 @@
 "use client";
 import Link from "next/link";
-import { useAnimate } from "framer-motion";
+import { motion, useAnimate } from "framer-motion";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+
+import sereniBG from "@/../public/svgs/backgrounds/sereni-flowers.svg";
+import Image from "next/image";
 
 export default function Home() {
   const [animationStarted, setAnimationStarted] = useState(false);
   const [animationCount, setAnimationCount] = useState(0);
   const [scope, animate] = useAnimate();
+  const [scope2, animate2] = useAnimate();
   const [isViewportSmall, setIsViewportSmall] = useState(false);
 
   const router = useRouter();
 
-  const viewportHeight = window.innerHeight;
+  const viewportHeight = !window ? 0 : window.innerHeight;
 
   // Calculate the proportional values based on the viewport height
   const proportionalWidth = (viewportHeight * 150) / 830; // Adjust as needed
@@ -61,10 +65,20 @@ export default function Home() {
             { duration: 1.75, ease: "easeInOut" }
           );
         };
+        const startAnimation2 = async () => {
+          await animate2(
+            scope2.current,
+            {
+              background: "#166534",
+            },
+            { duration: 1.75, ease: "easeInOut" }
+          );
+        };
 
         setAnimationStarted(true);
         setAnimationCount(animationCount + 1);
         startAnimation();
+        startAnimation2();
       }, 1000);
     } else {
       intervalId = setInterval(() => {
@@ -84,6 +98,16 @@ export default function Home() {
             );
           };
 
+          const startAnimation2 = async () => {
+            await animate2(
+              scope2.current,
+              {
+                background: "#166534",
+              },
+              { duration: 1.75, ease: "easeInOut" }
+            );
+          };
+
           if (animationCount > 9) {
             return;
           }
@@ -91,6 +115,7 @@ export default function Home() {
           setAnimationStarted(true);
           setAnimationCount(animationCount + 1);
           startAnimation();
+          startAnimation2();
         } else {
           const startAnimation = async () => {
             await animate(
@@ -99,7 +124,16 @@ export default function Home() {
                 width: isViewportSmall ? "154px" : "227px",
                 height: isViewportSmall ? "154px" : "227px",
               },
-              { duration: 2, ease: "easeInOut" }
+              { duration: 1.75, ease: "easeInOut" }
+            );
+          };
+          const startAnimation2 = async () => {
+            await animate2(
+              scope2.current,
+              {
+                background: "#94A3B8",
+              },
+              { duration: 1.75, ease: "linear" }
             );
           };
 
@@ -110,6 +144,7 @@ export default function Home() {
           setAnimationStarted(false);
           setAnimationCount(animationCount + 1);
           startAnimation();
+          startAnimation2();
         }
       }, 3000);
     }
@@ -120,8 +155,10 @@ export default function Home() {
     };
   }, [
     animate,
+    animate2,
     animationStarted,
     scope,
+    scope2,
     animationCount,
     router,
     isViewportSmall,
@@ -130,8 +167,19 @@ export default function Home() {
 
   return (
     <main
-      className={`flex w-full h-full items-center justify-center rounded-3xl overflow-hidden`}
+      className={`relative flex w-full h-full items-center justify-center rounded-3xl overflow-hidden`}
+      style={{
+        backgroundImage: sereniBG,
+      }}
     >
+      <div className="absolute h-full w-full">
+        <Image
+          src={sereniBG}
+          alt="Sereni Background"
+          layout="fill"
+          objectFit="cover"
+        />
+      </div>
       <div
         className={`duration-500 flex flex-col items-center justify-between w-full h-full min-h-[calc(100vh-48px)] px-4 pt-24 pb-4`}
       >
@@ -140,18 +188,6 @@ export default function Home() {
             antes de começar, respire{" "}
             <span className="text-[#365314]">bem</span> fundo.
           </h3>
-          <div
-            className={`flex items-center justify-center transition-all duration-500 ${
-              animationCount > 9 ? "opacity-0" : "opacity-100 w-auto h-auto"
-            }`}
-          >
-            {" "}
-            <p className="w-full text-[#775332] text-center text-[19.362px] font-medium leading-[23.234px] tracking-[-0.145px]">
-              {animationStarted
-                ? "puxe ar com o nariz"
-                : "assopre ar com a boca"}
-            </p>
-          </div>
         </div>
         <div
           className={`flex items-center justify-center transition-all duration-500 ${
@@ -197,11 +233,50 @@ export default function Home() {
             </svg>
           </div>
         </div>
-        <div className="mt-4">
+        <div className="flex flex-col items-center gap-14 mt-4">
+          <div
+            className={`flex items-center justify-center transition-all duration-500 ${
+              animationCount > 9 ? "opacity-0" : "opacity-100 w-auto h-auto"
+            }`}
+          >
+            {" "}
+            <motion.p
+              key={animationStarted ? "nariz" : "boca"}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.9, ease: "easeInOut" }}
+              className="w-full text-[#775332] text-center text-[30px] italic leading-[36px] tracking-[-0.225px]"
+            >
+              {animationCount === 0 ? (
+                <p
+                  style={{
+                    display: "block",
+                    content: "",
+                    height: "36px",
+                    width: "262px",
+                  }}
+                >
+                  {" "}
+                </p>
+              ) : animationStarted ? (
+                <>
+                  puxe ar <span className="font-bold">com o nariz</span>
+                </>
+              ) : (
+                <>
+                  assopre ar <span className="font-bold">com a boca</span>
+                </>
+              )}
+            </motion.p>
+          </div>
           <Link href={`/themes/praia/`}>
-            <button className="inline-flex items-center justify-center w-fit h-fit py-4 px-8 rounded-xl gap-5 bg-[#94A3B8]">
+            <button
+              ref={scope2}
+              className="inline-flex items-center justify-center w-fit h-fit py-4 px-8 rounded-xl gap-5 bg-[#94A3B8]"
+            >
               <p className="text-white text-2xl font-medium leading-[48px]">
-                jogar
+                respire
               </p>
             </button>
           </Link>
