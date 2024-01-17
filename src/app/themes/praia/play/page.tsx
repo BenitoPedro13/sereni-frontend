@@ -54,7 +54,7 @@ export default function Home() {
     let intervalId: NodeJS.Timeout;
     let timoutId: NodeJS.Timeout;
 
-    if (animationCount > 9) {
+    if (animationCount > 5) {
       return router.push("/themes/praia/start");
     }
 
@@ -71,7 +71,7 @@ export default function Home() {
                 ? `${proportionalAnimateValue}px`
                 : "368px",
             },
-            { duration: 1.75, ease: "easeInOut" }
+            { duration: 3, ease: "easeInOut" }
           );
         };
         const startAnimation2 = async () => {
@@ -80,7 +80,7 @@ export default function Home() {
             {
               background: "#166534",
             },
-            { duration: 1.75, ease: "easeInOut" }
+            { duration: 3, ease: "easeInOut" }
           );
         };
 
@@ -117,7 +117,7 @@ export default function Home() {
             );
           };
 
-          if (animationCount > 9) {
+          if (animationCount > 5) {
             return;
           }
 
@@ -146,7 +146,7 @@ export default function Home() {
             );
           };
 
-          if (animationCount > 9) {
+          if (animationCount > 5) {
             return;
           }
 
@@ -200,7 +200,7 @@ export default function Home() {
         </div>
         <div
           className={`flex items-center justify-center transition-all duration-500 ${
-            animationCount > 9
+            animationCount > 5
               ? "opacity-0"
               : "opacity-100 w-auto h-auto min-w-[244px] min-h-[244px]"
           }`}
@@ -208,7 +208,7 @@ export default function Home() {
           <div
             ref={scope}
             className={`flex items-center justify-center ${
-              animationCount > 9
+              animationCount > 5
                 ? "opacity-0 w-0 h-0"
                 : `opacity-100 w-auto h-auto min-w-[${proportionalAnimateValue}px] min-h-[${proportionalAnimateValue}px]`
             } bg-[#B6D1C1] rounded-full`}
@@ -224,7 +224,7 @@ export default function Home() {
               viewBox={`0 0 ${proportionalWidth} ${proportionalHeight}`}
               fill="none"
               className={`transition-opacity ${
-                animationCount > 9
+                animationCount > 5
                   ? "opacity-0"
                   : `opacity-100 w-auto h-auto min-w-[${proportionalWidth}px] min-h-[${proportionalHeight}px] max-w-[${proportionalHeight}px] max-h-[${proportionalHeight}px]`
               }`}
@@ -245,7 +245,7 @@ export default function Home() {
         <div className="flex flex-col items-center gap-14 mt-4">
           <div
             className={`flex items-center justify-center transition-all duration-500 ${
-              animationCount > 9 ? "opacity-0" : "opacity-100 w-auto h-auto"
+              animationCount > 5 ? "opacity-0" : "opacity-100 w-auto h-auto"
             }`}
           >
             {" "}
