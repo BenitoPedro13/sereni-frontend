@@ -8,11 +8,43 @@ import Image from "next/image";
 
 import SuccessMemoji from "@/../public/images/success-quiz.png";
 import FailMemoji from "@/../public/images/fail-quiz.png";
+import useThemesStore from "@/stores/Themes";
 
-export default function Home() {
+export default function Home({
+  params,
+}: {
+  params: { slug: string; id: string };
+}) {
   const [remainingTries, setRemainingTries] = useState(3);
   const [success, setSuccess] = useState<boolean | null>(null);
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
+  const activeTheme = useThemesStore((store) => store.activeTheme);
+  const activeThemeStep = useThemesStore((store) => store.activeThemeStep);
+
+  const setActiveTheme = useThemesStore((store) => store.setActiveTheme);
+  const setActiveThemeStep = useThemesStore(
+    (store) => store.setActiveThemeStep
+  );
+
+  const isLastThemeStep =
+    activeTheme?.themeSteps[activeTheme?.themeSteps.length - 1].id ===
+    activeThemeStep?.id;
+
+  let nextThemeStepId: number | null = null;
+
+  if (!isLastThemeStep && activeTheme !== null) {
+    nextThemeStepId =
+      activeTheme?.themeSteps[
+        activeTheme?.themeSteps.findIndex(
+          (item) => item.id === activeThemeStep?.id
+        ) + 1
+      ].id;
+  }
+
+  const nextUrl = isLastThemeStep
+    ? `/home`
+    : `/themes/${activeTheme?.slug}/${nextThemeStepId}/start`;
+
   const router = useRouter();
 
   const handleQuizButtonClick = (answer: boolean, label: string) => {
@@ -57,9 +89,9 @@ export default function Home() {
               <div className="flex flex-col items-center justify-center w-full flex-wrap gap-5">
                 <Image src={SuccessMemoji} alt="Parabéns você acertou!" />
                 <QuizResponseButton
-                  handleClick={handleQuizButtonClick}
+                  // handleClick={handleQuizButtonClick}
                   label={selectedAnswer ?? ""}
-                  answer
+                  // answer
                 />
                 <p className="w-[342px] text-[#775332] text-center text-lg font-semibold">
                   não está presente na foto
@@ -67,9 +99,16 @@ export default function Home() {
               </div>
             </div>
             <Link
-              href=""
+              href={nextUrl}
               onClick={(e) => {
-                e.preventDefault();
+                // e.preventDefault();
+                if (isLastThemeStep) {
+                  setActiveTheme("reiniciar tema");
+                  setActiveThemeStep(Infinity);
+                } else {
+                  console.log(nextThemeStepId);
+                  setActiveThemeStep(nextThemeStepId ?? +params.id);
+                }
                 e.stopPropagation();
                 setSelectedAnswer(null);
                 setSuccess(null);
@@ -93,9 +132,9 @@ export default function Home() {
               <div className="flex flex-col items-center justify-center w-full flex-wrap gap-5">
                 <Image src={FailMemoji} alt="Tente novamente!" />
                 <QuizResponseButton
-                  handleClick={handleQuizButtonClick}
+                  // handleClick={handleQuizButtonClick}
                   label={selectedAnswer ?? ""}
-                  answer
+                  // answer
                 />
                 <p className="w-[342px] text-[#775332] text-center text-lg font-semibold">
                   está presente na foto
@@ -130,23 +169,14 @@ export default function Home() {
               </p>
             </div>
             <div className="flex justify-center w-full flex-wrap gap-3">
-              <QuizResponseButton
-                handleClick={handleQuizButtonClick}
-                label={"Boné 🧢"}
-                answer
-              />
-              <QuizResponseButton
-                handleClick={handleQuizButtonClick}
-                label={"Guarda-Sol ⛱️"}
-              />
-              <QuizResponseButton
-                handleClick={handleQuizButtonClick}
-                label={"Água 💧"}
-              />
-              <QuizResponseButton
-                handleClick={handleQuizButtonClick}
-                label={"Areia 🏝️"}
-              />
+              {activeThemeStep?.answers.map((item) => (
+                <QuizResponseButton
+                  key={item.id}
+                  handleClick={handleQuizButtonClick}
+                  label={item.word}
+                  answer={item.correct}
+                />
+              ))}
             </div>
             <div className="flex flex-col items-center justify-center">
               <div className="flex flex-col items-center justify-center gap-2 mb-[38px]">

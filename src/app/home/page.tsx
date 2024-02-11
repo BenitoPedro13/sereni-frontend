@@ -1,13 +1,18 @@
+"use client";
+
 import LastPlayedThemeCards from "@/components/home/LastPlayedThemeCards";
 import HomeSection from "@/components/home/Section";
+import useThemesStore from "@/stores/Themes";
 import { Metadata } from "next";
 
-export const metadata: Metadata = {
-  title: "Sereni | Início",
-  description: "Ultimos temas que você jogou",
-};
+// export const metadata: Metadata = {
+//   title: "Sereni | Início",
+//   description: "Ultimos temas que você jogou",
+// };
 
 export default function Home() {
+  const data = useThemesStore((store) => store.data);
+
   return (
     <main className="flex h-full w-full justify-center px-4 pt-11 pb-12">
       <div className="flex flex-1 flex-col items-start w-full max-w-[390px] h-full gap-8 self-stretch">
@@ -43,11 +48,11 @@ export default function Home() {
             </>
           }
         >
-          <LastPlayedThemeCards />
-          <LastPlayedThemeCards />
-          <LastPlayedThemeCards />
+          {data.map((item) => (
+            <LastPlayedThemeCards key={item.id} theme={item} />
+          ))}
         </HomeSection>
-        <HomeSection
+        {/* <HomeSection
           title="Meus favoritos"
           subtitle="seus temas favoritos"
           titleIcon={
@@ -73,7 +78,7 @@ export default function Home() {
           <LastPlayedThemeCards />
           <LastPlayedThemeCards />
           <LastPlayedThemeCards />
-        </HomeSection>
+        </HomeSection> */}
       </div>
     </main>
   );

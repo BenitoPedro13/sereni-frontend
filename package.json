@@ -13,7 +13,8 @@
     "next": "14.0.3",
     "next-page-transitions": "1.0.0-beta.2",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "zustand": "^4.5.0"
   },
   "devDependencies": {
     "@types/node": "^20",

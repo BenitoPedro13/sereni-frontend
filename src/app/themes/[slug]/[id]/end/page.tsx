@@ -3,9 +3,12 @@ import Link from "next/link";
 import { useAnimate } from "framer-motion";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import useThemesStore from "@/stores/Themes";
 
 export default function Home() {
   const router = useRouter();
+
+  const activeThemeStep = useThemesStore((store) => store.activeThemeStep);
 
   return (
     <main
@@ -179,7 +182,7 @@ export default function Home() {
           </p>
         </div>
         <div className="">
-          <Link href={`/themes/praia/quiz`}>
+          <Link href={`/themes/praia/${activeThemeStep?.id}/quiz`}>
             <button className="inline-flex items-center justify-center w-fit h-fit py-4 px-8 rounded-xl gap-5 bg-[#166534]">
               <p className="text-white text-2xl font-medium leading-[48px]">
                 continuar

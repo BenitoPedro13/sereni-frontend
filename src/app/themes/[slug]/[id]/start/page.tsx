@@ -3,6 +3,7 @@ import BeachThemeStep from "@/../public/images/themes/beach/theme-step-bg.png";
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
+import useThemesStore from "@/stores/Themes";
 
 const variants = {
   hidden: { width: 0 },
@@ -12,6 +13,8 @@ const variants = {
 export default function Home() {
   const [play, setPlay] = useState(false);
   const router = useRouter();
+  const activeTheme = useThemesStore((store) => store.activeTheme);
+  const activeThemeStep = useThemesStore((store) => store.activeThemeStep);
 
   return (
     <main
@@ -19,7 +22,7 @@ export default function Home() {
     >
       <div
         style={{
-          backgroundImage: `url(${BeachThemeStep.src})`,
+          backgroundImage: `url(${activeThemeStep?.image})`,
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
           backgroundSize: "cover",
@@ -47,7 +50,11 @@ export default function Home() {
                 initial="hidden"
                 animate="enter"
                 transition={{ type: "linear", duration: 8, delay: 0.5 }}
-                onAnimationComplete={() => router.push("/themes/praia/end")}
+                onAnimationComplete={() =>
+                  router.push(
+                    `/themes/${activeTheme?.slug}/${activeThemeStep?.id}/end`
+                  )
+                }
                 className="h-[3px] self-stretch bg-[#F0FDF4]"
               ></motion.div>
             )}

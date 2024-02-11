@@ -3,13 +3,18 @@ import React from "react";
 import BeachThemeCardBg from "@/../public/images/themes/beach/card-cover.png";
 import DefaultMemoji from "@/../public/images/users/default-memoji.png";
 import Link from "next/link";
+import { ITheme } from "@/stores/Themes";
 
-const LastPlayedThemeCards = () => {
+interface IProps {
+  theme: ITheme;
+}
+
+const LastPlayedThemeCards: React.FC<IProps> = ({ theme }) => {
   return (
     <div className="flex flex-col items-start w-[358px] h-[358px] rounded-xl overflow-hidden border border-[#EAECF0] bg-white shadow-sm">
       <div
         style={{
-          backgroundImage: `url(${BeachThemeCardBg.src})`,
+          backgroundImage: `url(${theme.themeCardBg})`,
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
           backgroundSize: "cover",
@@ -36,13 +41,13 @@ const LastPlayedThemeCards = () => {
         <div className="relative z-[1] flex flex-col items-start gap-[11px] self-stretch">
           <div className="flex flex-col items-start self-stretch">
             <p className="w-full text-left text-white text-2xl font-semibold tracking-[-0.744px] mb-0">
-              praia 🏖️
+              {theme.name}
             </p>
             <p className="w-full text-left text-white text-base font-bold leading-7 tracking-[-0.744px] mb-0">
-              10 📷
+              {theme.themeSteps.length} 📷
             </p>
           </div>
-          <Link href="/themes/praia">
+          <Link href={`/themes/${theme.slug}`}>
             <button className="flex items-center justify-center w-fit h-fit py-2 px-4 rounded-md gap-2 bg-[#14532D]">
               <div className="w-4 h-4">
                 <svg

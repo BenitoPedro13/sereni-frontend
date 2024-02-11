@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 
 import sereniBG from "@/../public/svgs/backgrounds/sereni-flowers.svg";
 import Image from "next/image";
+import useThemesStore from "@/stores/Themes";
 
 export default function Home() {
   const [animationStarted, setAnimationStarted] = useState(false);
@@ -13,6 +14,8 @@ export default function Home() {
   const [scope, animate] = useAnimate();
   const [scope2, animate2] = useAnimate();
   const [isViewportSmall, setIsViewportSmall] = useState(false);
+  const activeTheme = useThemesStore((store) => store.activeTheme);
+  const activeThemeStep = useThemesStore((store) => store.activeThemeStep);
 
   const router = useRouter();
   let viewportHeight = useRef(0);
@@ -55,7 +58,9 @@ export default function Home() {
     let timoutId: NodeJS.Timeout;
 
     if (animationCount > 5) {
-      return router.push("/themes/praia/start");
+      return router.push(
+        `/themes/${activeTheme?.slug}/${activeThemeStep?.id}/start/`
+      );
     }
 
     if (animationCount === 0) {
@@ -279,7 +284,7 @@ export default function Home() {
               )}
             </motion.p>
           </div>
-          <Link href={`/themes/praia/`}>
+          <Link href={`/themes/praia/${activeThemeStep?.id}`}>
             <button
               ref={scope2}
               className="inline-flex items-center justify-center w-fit h-fit py-4 px-8 rounded-xl gap-5 bg-[#94A3B8]"

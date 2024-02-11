@@ -1,4 +1,4 @@
-import React, { Dispatch, FC, SetStateAction } from "react";
+import React from "react";
 
 import { Poppins } from "next/font/google";
 
