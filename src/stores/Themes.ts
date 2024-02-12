@@ -1,7 +1,7 @@
 import { create } from "zustand";
 
-// export const baseApiUrl = "https://benitopedro.tech";
-export const baseApiUrl = "http://localhost:3001";
+export const baseApiUrl = "https://sereni.space";
+// export const baseApiUrl = "http://localhost:3001";
 
 export interface IThemesStore {
   data: ITheme[];
