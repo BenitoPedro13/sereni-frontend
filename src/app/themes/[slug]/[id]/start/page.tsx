@@ -49,7 +49,7 @@ export default function Home() {
                 variants={variants}
                 initial="hidden"
                 animate="enter"
-                transition={{ type: "linear", duration: 8, delay: 0.5 }}
+                transition={{ type: "linear", duration: 15, delay: 0.5 }}
                 onAnimationComplete={() =>
                   router.push(
                     `/themes/${activeTheme?.slug}/${activeThemeStep?.id}/end`
